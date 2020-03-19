@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+	<appender name="RootFileAppender"
+		class="org.apache.log4j.RollingFileAppender">
+		<param name="maxFileSize" value="10MB" />
+		<param name="maxBackupIndex" value="10" />
+		<param name="File" value="logs/zones-root.log" />
+		<param name="threshold" value="info"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy-MM-dd HH:mm:ss.SSS} %p (thread=%t, category=%c, ndc=%x) : %m%n" />
+		</layout>
+	</appender>
+	<category name="com.test.main.EiTest" additivity="false">
+		<appender-ref ref="RootFileAppender"/>
+	</category>
+	
+	<root>
+		<appender-ref ref="RootFileAppender"/>
+	</root>
+</log4j:configuration>

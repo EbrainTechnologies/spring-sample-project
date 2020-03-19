@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+    <!-- 
+   		Hibernate Configuration File For ZONES Web Services database.
+		@author: Ulaganathan
+     -->
+<hibernate-configuration>
+	<session-factory>
+	<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernatetool.metadatadialect">com.ebrain.dialect.PostgreSQLMetaDialect</property>  -->
+		<!-- <property name="hibernate.c3p0.max_size">100</property> -->
+		 
+         <!-- create DB from hibernate entities -->
+         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+         <property name="hibernate.show_sql">true</property>
+
+         <property name="hibernate.cache.use_second_level_cache">false</property>
+
+         <!-- For transactions -->
+         <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+         <property name="hibernate.current_session_context_class">thread</property>
+         
+         <!--  Persistance Classes -->
+         <mapping class="com.ebrain.bean.User"/>
+         <mapping class="com.ebrain.bean.Role"/>
+         <mapping class="com.ebrain.bean.UserAction"/> 
+	</session-factory>
+</hibernate-configuration>

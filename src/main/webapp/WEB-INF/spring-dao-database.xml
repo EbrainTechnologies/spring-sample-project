@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	Spring configuration file that defines all the Database Beans of the project.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+        <!--
+                Zones Database 
+	    -->
+      
+	<bean id="zonesWebServicesDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+	   <property name="driverClass" value="${com.ebrain.boostrap.jdbc.driver}" />
+	   <property name="jdbcUrl" value="${com.ebrain.boostrap.jdbc.url}" />
+	   <property name="username" value="${com.ebrain.boostrap.jdbc.username}"/>
+	   <property name="password" value="${com.ebrain.boostrap.jdbc.password}"/>
+	   <property name="idleConnectionTestPeriod" value="60"/>
+	   <property name="idleMaxAge" value="240"/>
+	   <property name="maxConnectionsPerPartition" value="30"/>
+	   <property name="minConnectionsPerPartition" value="10"/>
+	   <property name="partitionCount" value="3"/>
+	   <property name="acquireIncrement" value="5"/>
+	   <property name="statementsCacheSize" value="100"/>
+	   <property name="releaseHelperThreads" value="3"/>
+	</bean> 
+	
+	<bean id="boostrapSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="zonesWebServicesDataSource" />
+		<property name="configLocation" value="classpath:/hibernate.cfg.xml" />
+	</bean>	
+	
+	<bean id="boostrapTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="boostrapSessionFactory" />
+	</bean>  
+              
+     <!-- Application specific DAO -->
+     <bean id="daoRegistery" class="com.ebrain.dao.implementation.DAORegistry">
+     
+     	<property name="userDAO">
+     		<bean id="userDAO" class="com.ebrain.dao.implementation.UserDAO">
+			 	<property name="sessionFactory" ref="boostrapSessionFactory"/>
+		     </bean>
+     	</property>
+     	
+     	<property name="roleDAO">
+     		<bean id="roleDAO" class="com.ebrain.dao.implementation.RoleDAO">
+			 	<property name="sessionFactory" ref="boostrapSessionFactory"/>
+		     </bean>
+     	</property>
+     	
+     	<property name="userActionDAO">
+     		<bean id="userActionDAO" class="com.ebrain.dao.implementation.UserActionDAO">
+			 	<property name="sessionFactory" ref="boostrapSessionFactory"/>
+		     </bean>
+     	</property>
+	</bean>
+
+</beans>

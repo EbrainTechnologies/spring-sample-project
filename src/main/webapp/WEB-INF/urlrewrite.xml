@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!DOCTYPE urlrewrite 
+	PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN" 
+	"./dtds/urlrewrite3.0.dtd">
+<urlrewrite>
+	<rule>
+    	<from>^([wW]{3}).([0-9a-zA-Z-.,:()*]+)$</from>
+    	<to type="redirect">$2</to>
+	</rule>
+	<rule>
+    	<from>^zones$</from>
+    	<to type="redirect">zones/</to>
+	</rule>
+	
+	<rule>
+    	<from>^$</from>
+    	<to type="redirect">/</to>
+	</rule>
+	
+	<!-- <rule match-type="regex">
+       <from>^/zones/([0-9a-zA-Z-.,:()*]+)-([0-9]+){1,2}-([0-9]+){1,2}-([0-9]+){4}-0-([0-9]+)$
+	   </from>
+       <to>zones/TicketData?eventId=$5</to>
+    </rule>
+	<rule match-type="regex">
+       <from>^/zones/([0-9a-zA-Z-.,:()*]+)-([0-9]+){1,2}-([0-9]+){1,2}-([0-9]+){4}-([0-9]+){1,2}-([0-9]+)$
+	   </from>
+       <to>zones/TicketData?eventId=$6&amp;quantity=$5</to>
+    </rule>
+	<rule match-type="regex">
+       <from>^/zones/(.*?)-([0-9]+){1,2}-([0-9]+){1,2}-([0-9]+){4}-([0-9]+)$</from>
+       <to>TicketList?event=$5</to>
+    </rule>
+	<rule match-type="regex">
+       <from>^/zones/([0-9a-zA-Z-.,()*]+)-([0-9]+){1,2}-([0-9]+){1,2}-([0-9]+){4}-Tickets-([0-9]+)-([0-9]+)$</from>
+       <to>TicketData?eventId=$5&amp;quantity=$6</to>
+    </rule>
+    <rule match-type="regex">
+       <from>^/zones/([0-9a-zA-Z-.,()*]+)-([0-9]+){1,2}-([0-9]+){1,2}-([0-9]+){4}-Tickets-([0-9]+)-([0-9]+)-([a-z]+)$</from>
+       <to>TicketData?eventId=$5&amp;quantity=$6&amp;sort=$7</to>
+    </rule>
+     <rule match-type="regex">
+       <from>^/zones/([0-9a-zA-Z-.,()*]+)-([0-9]+){1,2}-([0-9]+){1,2}-([0-9]+){4}-Tickets-([0-9]+)-([0-9]+)-([a-z]+)-(true|false)$</from>
+       <to>TicketData?eventId=$5&amp;quantity=$6&amp;sort=$7&amp;isAsc=$8</to>
+    </rule>
+    <rule match-type="regex">
+       <from>^/zones/([0-9a-zA-Z-.,()*]+)-([0-9]+){1,2}-([0-9]+){1,2}-([0-9]+){4}-Tickets-([0-9]+)-([0-9]+)-([0-9]+)$</from>
+       <to>TicketData?eventId=$5&amp;quantity=$6&amp;process=$7</to>
+    </rule>
+    
+    <rule match-type="regex">
+       <from>^/zones/([0-9a-zA-Z-.,:()*]+)-([0-9]+){1,2}-([0-9]+){1,2}-([0-9]+){4}-Tickets-([0-9]+)$</from>
+       <to>TicketData?eventId=$5</to>
+    </rule>
+	<rule match-type="regex">
+       <from>^/zones/Tickets-at-([0-9a-zA-Z-.,()]+)-([0-9]+)$</from>
+       <to>ZoneEventByVenue?location=$1&amp;venueId=$2</to>
+    </rule>
+    <rule match-type="regex">
+       <from>^/zones/([0-9a-zA-Z-*]+)-artist-([0-9]+)$</from>
+       <to>ToursByArtist?name=$1&amp;artistId=$2</to>
+    </rule>
+    <rule match-type="regex">
+       <from>^/zones/venue-event-ticket-([0-9a-zA-Z-*]+)-at-([0-9a-zA-Z-*]+)$</from>
+       <to>VenueEvent?name=$1&amp;isState=1&amp;stateName=$2</to>
+    </rule>
+    <rule match-type="regex">
+       <from>^/zones/venue-event-ticket-([0-9a-zA-Z-*]+)$</from>
+       <to>VenueEvent?name=$1&amp;isState=0</to>
+    </rule>
+     
+     <rule match-type="regex">
+       <from>^/zones/Show-Error-([0-9]+)$</from>
+       <to>ShowErrorPages?eventId=$1</to>
+    </rule>
+    <rule match-type="regex">
+       <from>^/zones/([0-9a-zA-Z-.,:()*]+)-([0-9]+)$</from>
+       <to>ZoneEvent?artistId=$2</to>
+    </rule> -->
+	
+	
+</urlrewrite>

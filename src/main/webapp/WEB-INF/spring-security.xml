@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/assets/**" access="isAnonymous()"/>
+		<security:intercept-url pattern="/Login" access="isAnonymous()"/>
+		<security:intercept-url pattern="/Registration" access="isAnonymous()"/> 
+		<security:intercept-url pattern="/CreateAccount" access="isAnonymous()"/> 
+		<security:intercept-url pattern="/Home" access="hasAnyRole('MANAGER','ADMIN','USER')"/>
+		<security:intercept-url pattern="/Logout" access="hasAnyRole('MANAGER','ADMIN','USER')"/>
+		<security:intercept-url pattern="/*" access="isFullyAuthenticated()"/>
+		
+		<security:form-login login-page="/Login" login-processing-url="/Login"
+		default-target-url="/" authentication-failure-url="/Login?error=true"
+		username-parameter="username" password-parameter="password"/>
+		
+		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		<!-- <security:intercept-url pattern="/assets/**" access="permitAll"/> -->
+		
+		<security:csrf disabled="true"/>
+		
+		<security:logout logout-url="/Logout" logout-success-url="/Login"/>
+		
+		<security:headers>
+			<security:frame-options policy="SAMEORIGIN"/>
+		</security:headers>
+		
+	</security:http>
+
+	<bean id="userDetailsServiceImpl" class="com.ebrain.security.UserServiceImpl"></bean>
+	
+   <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+			<value>
+				resource.loader=class
+				class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userDetailsServiceImpl"></property>
+	</bean>
+	
+	<bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+		<constructor-arg name="providers">
+			<list>
+				<ref bean="authenticationProvider"/>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userDetailsServiceImpl">
+			<security:password-encoder hash="sha"></security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>
